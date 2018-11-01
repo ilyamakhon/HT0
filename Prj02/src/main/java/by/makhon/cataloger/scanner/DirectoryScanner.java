@@ -1,4 +1,4 @@
-package by.makhon.cataloger.directoryscanner;
+package by.makhon.cataloger.scanner;
 
 import java.io.File;
 import java.util.ArrayList;

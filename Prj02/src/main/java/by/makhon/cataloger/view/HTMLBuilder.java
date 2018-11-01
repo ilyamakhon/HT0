@@ -2,6 +2,7 @@ package by.makhon.cataloger.view;
 
 import by.makhon.cataloger.bean.Album;
 import by.makhon.cataloger.bean.Artist;
+import by.makhon.cataloger.bean.Model;
 import by.makhon.cataloger.bean.Song;
 
 import java.io.File;
@@ -12,8 +13,8 @@ import java.util.List;
 
 public class HTMLBuilder {
 
-    public void buildHTML(List<Artist> artists) {
-        String htmlFilePath = "C:\\Users\\reven\\IdeaProjects\\cataloger\\songs_catalogue.html";
+    public void buildHTML(Model model) {
+        String htmlFilePath = "C:\\Users\\reven\\Desktop\\HT0\\Prj02\\music_catalogue.html";
         List<String> htmlList = new ArrayList<>();
         File htmlFile = new File(htmlFilePath);
         try {
@@ -30,21 +31,18 @@ public class HTMLBuilder {
                     "  <title>HTML5</title>\n" +
                     " </head>" +
                     "<body>\n");
-            for (Artist artist : artists) {
-                htmlList.add("<p>Singer: " + artist.getName() + "</p>");
+            for (Artist artist : model.getArtists()) {
+                htmlList.add("<div id=\"" + artist.getName() + "\">");
+                htmlList.add("<p style=\"margin: 10px 0 0 0;\">Artist: " + artist.getName() + "</p>");
+                htmlList.add("<p style=\"margin: 5px 0 0 50px;\">Album: " + artist.getAlbum() + "</p>");
                 for (Album album : artist.getAlbums()) {
-                    if (artist.getName().equals(album.getArtistName())){
-                        htmlList.add("<p style=\"margin-left: 50px\">Album: " + album.getName() + "</p>");
-                        for (Song song : album.getSongs()) {
-                            if (song.getAlbum().equals(album.getName()) && song.getArtist().equals(artist.getName())) {
-                                htmlList.add("<p style=\"margin-left: 100px\">Song title: " + song.getName() + "</p>" +
-                                        "<p style=\"margin-left: 150px; display: inline-block; \" >Song duration: "+ song.getDuration() + "</p>"
-                                        + "<a style=\"margin-left: 25px; display: inline-block; \" href=\"" + song.getLocalLink() + "\">" +
-                                        song.getLocalLink() + "</a>");
-                            }
-                        }
+                    for (Song song : album.getSongs()) {
+                        htmlList.add("<p style=\"margin: 5px 0 0 105px; display: inline-block;\">Song title: " + song.getName() + "</p>" +
+                                "<p style=\"margin: 0 20px; display: inline-block; \" >Song duration: "+ song.getDuration() + "</p>"
+                                + "<a style=\"display: inline-block; \" href=\"" + song.getLocalLink() + "\">Local link</a>");
                     }
                 }
+                htmlList.add("</div>");
             }
             htmlList.add(
                     " </body>\n" +

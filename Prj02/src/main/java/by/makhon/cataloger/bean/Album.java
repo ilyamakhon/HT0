@@ -11,9 +11,9 @@ public class Album {
     public Album() {
     }
 
-    public Album(String artistName, String name) {
-        this.artistName = artistName;
+    public Album(String name, String artistName) {
         this.name = name;
+        this.artistName = artistName;
     }
 
     public String getArtistName() {

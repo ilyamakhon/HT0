@@ -13,6 +13,12 @@ public class Song {
     public Song() {
     }
 
+    public Song(String name, String duration, String localLink) {
+        this.name = name;
+        this.duration = duration;
+        this.localLink = localLink;
+    }
+
     public Song(String artist, String album, String name, String duration, String localLink) {
         this.artist = artist;
         this.album = album;

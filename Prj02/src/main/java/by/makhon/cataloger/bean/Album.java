@@ -11,6 +11,10 @@ public class Album {
     public Album() {
     }
 
+    public Album(String name) {
+        this.name = name;
+    }
+
     public Album(String name, String artistName) {
         this.name = name;
         this.artistName = artistName;

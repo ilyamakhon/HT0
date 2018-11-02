@@ -12,13 +12,20 @@ public class Artist {
     public Artist() {
     }
 
+    public Artist(String name) {
+        this.name = name;
+    }
+
+    public Artist(String name, String album) {
+        this.name = name;
+        this.album = album;
+    }
+
     public Artist(String name, String album, String song) {
         this.name = name;
         this.album = album;
         this.song = song;
     }
-
-
 
     public String getName() {
         return name;
@@ -46,6 +53,16 @@ public class Artist {
 
     public List<Album> getAlbums() {
         return albums;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "name='" + name + '\'' +
+                ", album='" + album + '\'' +
+                ", song='" + song + '\'' +
+                ", albums=" + albums +
+                '}';
     }
 
     public void setAlbums(List<Album> albums) {

@@ -30,7 +30,7 @@ public class Main {
         for (Artist artist : model.getArtists()) {
             System.out.println("Artist: " + artist.getName());
             for (Album album : artist.getAlbums()) {
-                System.out.println("Album: " + album.getName() + " " + " Artist: " +album.getArtistName());
+                System.out.println("Album: " + album.getName());
                 for (Song song : album.getSongs()) {
                     System.out.println("Song name: " + song.getName() + " Duration: " + song.getDuration());
                     System.out.println(song.getLocalLink());

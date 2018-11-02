@@ -4,6 +4,7 @@ import by.makhon.cataloger.bean.Album;
 import by.makhon.cataloger.bean.Artist;
 import by.makhon.cataloger.bean.Model;
 import by.makhon.cataloger.bean.Song;
+import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
@@ -19,21 +20,30 @@ public class ModelBuilder {
     public void buildModel(List<Mp3File> mp3Files) {
         for (Mp3File mp3File : mp3Files) {
             ID3v2 tag = mp3File.getId3v2Tag();
-            model.getArtists().add(new Artist(tag.getArtist(), tag.getAlbum(), tag.getTitle()));
 
-            if (findArtist(model.getArtists(), tag.getArtist()) == null) {
-                model.getArtists().add(new Artist(tag.getArtist(), tag.getAlbum(), tag.getTitle()));
+            Artist artist = findArtist(model.getArtists(), tag.getArtist());
+            if (artist == null) {
+                Song song = new Song(tag.getTitle(), convertSongDurationFromSeconds(mp3File.getLengthInSeconds()),
+                        mp3File.getFilename());
+                Album album = new Album(tag.getAlbum());
+                Artist newArtist = new Artist(tag.getArtist(), tag.getAlbum());
+                album.addSong(song);
+                newArtist.addAlbum(album);
+                model.addArtist(newArtist);
             } else {
-                for (Artist artist : model.getArtists()) {
-                    if (findAlbum(artist.getAlbums(), artist.getAlbum()) == null) {
-                        artist.getAlbums().add(new Album(artist.getAlbum(), artist.getName()));
-                        for (Album album : artist.getAlbums()) {
-                            if (findSong(album.getSongs(), artist.getSong()) == null){
-                                album.addSong(new Song(artist.getSong(),
-                                        convertSongDurationFromSeconds(mp3File.getLengthInSeconds()),
-                                        mp3File.getFilename()));
-                            }
-                        }
+                Album album = findAlbum(artist.getAlbums(), tag.getAlbum());
+                if (album == null) {
+                    Song song = new Song(tag.getTitle(), convertSongDurationFromSeconds(mp3File.getLengthInSeconds()),
+                            mp3File.getFilename());
+                    Album newAlbum = new Album(tag.getAlbum());
+                    newAlbum.addSong(song);
+                    artist.addAlbum(newAlbum);
+                } else {
+                    Song song = findSong(album.getSongs(), tag.getTitle());
+                    if (song == null) {
+                        Song newSong = new Song(tag.getTitle(), convertSongDurationFromSeconds(mp3File.getLengthInSeconds()),
+                                mp3File.getFilename());
+                        album.addSong(newSong);
                     }
                 }
             }
@@ -51,7 +61,11 @@ public class ModelBuilder {
             return null;
         }
         for (Artist artist : artists) {
-            if (artist.getName() == null || artist.getName().equals(artistName)) {
+            if (artist.getName() == null) {
+                artist.setName("Unknown artist");
+                return artist;
+            }
+            if (artist.getName().equals(artistName)) {
                 return artist;
             }
         }
@@ -63,7 +77,11 @@ public class ModelBuilder {
             return null;
         }
         for (Album album : albums) {
-            if (album.getName() == null || album.getName().equals(albumName)) {
+            if (album.getName() == null) {
+                album.setName("Unknown album");
+                return album;
+            }
+            if (album.getName().equals(albumName)) {
                 return album;
             }
         }
@@ -75,7 +93,11 @@ public class ModelBuilder {
             return null;
         }
         for (Song song : songs) {
-            if (song.getName() == null || song.getName().equals(songName)) {
+            if (song.getName() == null) {
+                song.setName("Unknown song");
+                return song;
+            }
+            if (song.getName().equals(songName)) {
                 return song;
             }
         }

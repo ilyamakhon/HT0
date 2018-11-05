@@ -12,18 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HTMLBuilder {
+    private final String HTML_FILE_PATH = "./src/"+ this.getClass().getPackage().getName().replaceAll(".","/") + "/music_catalogue.html";
 
     public void buildHTML(Model model) {
-        String htmlFilePath = "C:\\Users\\reven\\Desktop\\HT0\\Prj02\\music_catalogue.html";
         List<String> htmlList = new ArrayList<>();
-        File htmlFile = new File(htmlFilePath);
+        File htmlFile = new File(HTML_FILE_PATH);
         try {
             if(htmlFile.createNewFile()){
-                System.out.println(htmlFilePath + " File Created");
+                System.out.println(HTML_FILE_PATH + " File Created");
             }else {
-                System.out.println("File " + htmlFilePath + " already exists");
+                System.out.println("File " + HTML_FILE_PATH + " already exists");
             }
-            FileOutputStream fos = new FileOutputStream(htmlFilePath);
+            FileOutputStream fos = new FileOutputStream(HTML_FILE_PATH);
             htmlList.add("<!DOCTYPE html>\n" +
                             "<html>\n" +
                             " <head>\n" +
@@ -37,9 +37,11 @@ public class HTMLBuilder {
                 for (Album album : artist.getAlbums()) {
                     htmlList.add("<p style=\"margin: 5px 0 0 50px;\">Album: " + album.getName() + "</p>");
                     for (Song song : album.getSongs()) {
+                        htmlList.add("<div style=\"display: block;\")>");
                         htmlList.add("<p style=\"margin: 5px 0 0 105px; display: inline-block;\">Song title: " + song.getName() + "</p>" +
                                 "<p style=\"margin: 0 20px; display: inline-block; \" >Song duration: "+ song.getDuration() + "</p>"
                                 + "<a style=\"display: inline-block; \" href=\"" + song.getLocalLink() + "\">Local link</a>");
+                        htmlList.add("</div>");
                     }
                 }
                 htmlList.add("</div>");

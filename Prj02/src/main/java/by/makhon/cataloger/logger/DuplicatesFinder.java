@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DuplicatesFinder {
+class DuplicatesFinder {
 
     private List<Mp3Duplicate> removeDuplicates(List<Mp3Duplicate> mp3DuplicateList) {
         Set<Mp3Duplicate> removingDuplicatesSet = new HashSet<>(mp3DuplicateList);
@@ -17,7 +17,7 @@ public class DuplicatesFinder {
         return mp3DuplicateList;
     }
 
-    public List<Mp3Duplicate> getChecksumDuplicates(List<Mp3Bean> mp3Files) {
+    List<Mp3Duplicate> getChecksumDuplicates(List<Mp3Bean> mp3Files) {
         List<Mp3Duplicate> mp3Beans = new ArrayList<>();
         for (Mp3Bean mp3Bean : mp3Files) {
             Mp3Duplicate mp3Duplicate = findChecksumDuplicates(mp3Files, mp3Bean.getChecksum());
@@ -40,14 +40,14 @@ public class DuplicatesFinder {
             if (mp3Bean.getChecksum().equals(checksum)) {
                 String artistName = mp3Bean.getArtist();
                 String localLink = mp3Bean.getLocalLink();
-                mp3Duplicate.setArtistName(artistName);
+                mp3Duplicate.setArtist(artistName);
                 mp3Duplicate.addLink(localLink);
             }
         }
         return mp3Duplicate;
     }
 
-    public List<Mp3Duplicate> getDuplicates(List<Mp3Bean> mp3Files) {
+    List<Mp3Duplicate> getDuplicates(List<Mp3Bean> mp3Files) {
         List<Mp3Duplicate> mp3Beans = new ArrayList<>();
         for (Mp3Bean mp3Bean : mp3Files) {
             Mp3Duplicate mp3Duplicate = findDuplicates(mp3Files, mp3Bean.getArtist(), mp3Bean.getAlbum(), mp3Bean.getSong());
@@ -71,9 +71,9 @@ public class DuplicatesFinder {
                     (mp3Bean.getAlbum().equals(albumName)) &&
                     (mp3Bean.getSong().equals(songName)) ) {
 
-                mp3Duplicate.setArtistName(mp3Bean.getArtist());
-                mp3Duplicate.setAlbumName(mp3Bean.getAlbum());
-                mp3Duplicate.setSongName(mp3Bean.getSong());
+                mp3Duplicate.setArtist(mp3Bean.getArtist());
+                mp3Duplicate.setAlbum(mp3Bean.getAlbum());
+                mp3Duplicate.setSong(mp3Bean.getSong());
                 mp3Duplicate.addLink(mp3Bean.getLocalLink());
             }
         }

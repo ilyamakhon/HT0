@@ -22,9 +22,9 @@ public class FileConverter {
                     if (mp3File.hasId3v2Tag()) {
                         ID3v2 tag = mp3File.getId3v2Tag();
                         Mp3Bean mp3Bean = new Mp3Bean();
-                        mp3Bean.setArtist(tag.getArtist() == null ? "Unknown Artist" : tag.getArtist());
-                        mp3Bean.setAlbum(tag.getAlbum() == null ? "Unknown Album" : tag.getAlbum());
-                        mp3Bean.setSong(tag.getTitle() == null ? "Unknown Song" : tag.getTitle());
+                        mp3Bean.setArtist(tag.getArtist() == null || tag.getArtist().equals("") ? "Unknown Artist" : tag.getArtist());
+                        mp3Bean.setAlbum(tag.getAlbum() == null || tag.getAlbum().equals("") ? "Unknown Album" : tag.getAlbum());
+                        mp3Bean.setSong(tag.getTitle() == null || tag.getTitle().equals("") ? "Unknown Song" : tag.getTitle());
                         mp3Bean.setDuration(convertSongDurationFromSeconds(mp3File.getLengthInSeconds()));
                         mp3Bean.setLocalLink(mp3File.getFilename());
                         mp3Bean.setChecksum(checksumFile(file));

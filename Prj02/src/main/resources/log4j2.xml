@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Configuration>   
+    <Appenders>
+        <File name="duplicates-log" fileName="target/logs/duplicates.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{2} [%t] %l %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="duplicates-checksum-log" fileName="target/logs/duplicates_checksum.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{2} [%t] %l %m%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="duplicates-log" level="info" additivity="false">
+            <appender-ref ref="duplicates-log" level="info"/>>
+        </Logger>
+        <Logger name="duplicates-checksum-log" level="info" additivity="false">
+            <appender-ref ref="duplicates-checksum-log" level="info"/>
+        </Logger>
+    </Loggers>
+</Configuration>

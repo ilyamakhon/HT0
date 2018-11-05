@@ -19,14 +19,6 @@ public class Song {
         this.localLink = localLink;
     }
 
-    public Song(String artist, String album, String name, String duration, String localLink) {
-        this.artist = artist;
-        this.album = album;
-        this.name = name;
-        this.duration = duration;
-        this.localLink = localLink;
-    }
-
     public String getName() {
         return name;
     }

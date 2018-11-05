@@ -25,17 +25,17 @@ public class HTMLBuilder {
             }
             FileOutputStream fos = new FileOutputStream(htmlFilePath);
             htmlList.add("<!DOCTYPE html>\n" +
-                    "<html>\n" +
-                    " <head>\n" +
-                    "  <meta charset=\"utf-8\" />\n" +
-                    "  <title>HTML5</title>\n" +
-                    " </head>" +
-                    "<body>\n");
+                            "<html>\n" +
+                            " <head>\n" +
+                            "  <meta charset=\"utf-8\" />\n" +
+                            "  <title>HTML5</title>\n" +
+                            " </head>" +
+                            "<body>\n");
             for (Artist artist : model.getArtists()) {
                 htmlList.add("<div id=\"" + artist.getName() + "\">");
                 htmlList.add("<p style=\"margin: 10px 0 0 0;\">Artist: " + artist.getName() + "</p>");
-                htmlList.add("<p style=\"margin: 5px 0 0 50px;\">Album: " + artist.getAlbum() + "</p>");
                 for (Album album : artist.getAlbums()) {
+                    htmlList.add("<p style=\"margin: 5px 0 0 50px;\">Album: " + album.getName() + "</p>");
                     for (Song song : album.getSongs()) {
                         htmlList.add("<p style=\"margin: 5px 0 0 105px; display: inline-block;\">Song title: " + song.getName() + "</p>" +
                                 "<p style=\"margin: 0 20px; display: inline-block; \" >Song duration: "+ song.getDuration() + "</p>"

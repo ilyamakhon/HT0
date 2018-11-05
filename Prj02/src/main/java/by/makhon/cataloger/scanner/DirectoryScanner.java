@@ -14,6 +14,9 @@ public class DirectoryScanner {
 
     public void scanDirectories(String[] paths) {
         List<File> directories = new ArrayList<>();
+        if (paths.length == 0) {
+            System.out.println("No directories to scan");
+        }
         for (String path : paths) {
             directories.add(new File(path));
         }
@@ -30,7 +33,7 @@ public class DirectoryScanner {
                     }
                 }
             } else {
-                System.out.println("There are no mp3 files in directory: " + directory.getAbsolutePath());
+                System.out.println("There are no files to scan (PLEASE CHECK DIRECTORY PATH): " + directory.getAbsolutePath());
             }
         }
     }

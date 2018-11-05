@@ -1,35 +1,56 @@
 package by.makhon.cataloger.converter;
 
-import by.makhon.cataloger.bean.Album;
-import by.makhon.cataloger.bean.Artist;
-import by.makhon.cataloger.bean.Model;
-import by.makhon.cataloger.bean.Song;
+import by.makhon.cataloger.bean.*;
 import com.mpatric.mp3agic.*;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileConverter {
 
-    public List<Mp3File> fileToMP3(List<File> files) {
-        List<Mp3File> mp3Files = new ArrayList<>();
+    public List<Mp3Bean> fileToMP3(List<File> files) {
+        List<Mp3Bean> mp3Beans = new ArrayList<>();
         try {
             for (File file : files) {
                 String fileExtension = getFileExtension(file);
                 if (fileExtension.equals("mp3")) {
                     Mp3File mp3File = new Mp3File(file.getAbsolutePath());
                     if (mp3File.hasId3v2Tag()) {
-                        mp3Files.add(mp3File);
+                        ID3v2 tag = mp3File.getId3v2Tag();
+                        Mp3Bean mp3Bean = new Mp3Bean();
+                        mp3Bean.setArtist(tag.getArtist() == null ? "Unknown Artist" : tag.getArtist());
+                        mp3Bean.setAlbum(tag.getAlbum() == null ? "Unknown Album" : tag.getAlbum());
+                        mp3Bean.setSong(tag.getTitle() == null ? "Unknown Song" : tag.getTitle());
+                        mp3Bean.setDuration(convertSongDurationFromSeconds(mp3File.getLengthInSeconds()));
+                        mp3Bean.setLocalLink(mp3File.getFilename());
+                        mp3Bean.setChecksum(checksumFile(file));
+                        mp3Beans.add(mp3Bean);
+                    } else {
+                        Mp3Bean mp3Bean = new Mp3Bean();
+                        mp3Bean.setArtist("Unknown Artist");
+                        mp3Bean.setAlbum("Unknown Album");
+                        mp3Bean.setSong("Unknown Song");
+                        mp3Bean.setDuration(convertSongDurationFromSeconds(mp3File.getLengthInSeconds()));
+                        mp3Bean.setLocalLink(mp3File.getFilename());
+                        mp3Bean.setChecksum(checksumFile(file));
+                        mp3Beans.add(mp3Bean);
                     }
-
                 }
             }
         } catch (UnsupportedTagException | IOException | InvalidDataException | NullPointerException e) {
             e.printStackTrace();
         }
-        return mp3Files;
+        return mp3Beans;
+    }
+
+    private String convertSongDurationFromSeconds(long duration) {
+        long minutes = ((duration % 3600) / 60);
+        long seconds = (duration % 60);
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
     private String getFileExtension(File file) {
@@ -37,5 +58,14 @@ public class FileConverter {
         if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
             return fileName.substring(fileName.lastIndexOf(".")+1);
         else return "";
+    }
+
+    private String checksumFile(File file) {
+        try{
+            return DigestUtils.md5Hex(new FileInputStream(file));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return null;
     }
 }

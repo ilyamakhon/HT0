@@ -13,9 +13,10 @@ public class Main {
     private static List<Building> buildings = buildingStorage.getBuildingStorage();
 
     public static void main(String[] args) {
-        validator.validate(buildings);
         for (Building building : buildings) {
             building.describe();
         }
+        validator.validate(buildings);
+
     }
 }

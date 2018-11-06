@@ -6,28 +6,19 @@ import java.util.Objects;
 
 public class Building {
 
-    private int buildingId;
-    private String buildingName;
+    private String name;
     private List<Room> rooms = new ArrayList<>();
 
-    public Building(String buildingName) {
-        this.buildingName = buildingName;
+    public Building(String name) {
+        this.name = name;
     }
 
-    public int getBuildingId() {
-        return buildingId;
+    public String getName() {
+        return name;
     }
 
-    public void setBuildingId(int buildingId) {
-        this.buildingId = buildingId;
-    }
-
-    public String getBuildingName() {
-        return buildingName;
-    }
-
-    public void setBuildingName(String buildingName) {
-        this.buildingName = buildingName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Room> getRooms() {
@@ -43,14 +34,13 @@ public class Building {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Building building = (Building) o;
-        return buildingId == building.buildingId &&
-                Objects.equals(buildingName, building.buildingName) &&
+        return Objects.equals(name, building.name) &&
                 Objects.equals(rooms, building.rooms);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(buildingId, buildingName, rooms);
+        return Objects.hash(name, rooms);
     }
 
     public void addRoom(Room room) {
@@ -59,24 +49,15 @@ public class Building {
 
     public Room getRoomByName(String roomName){
         for (Room room : rooms) {
-            if (room.getRoomName().equals(roomName)) {
+            if (room.getName().equals(roomName)) {
                 return room;
             }
         }
         throw new NullPointerException("There is no room with name: " + roomName);
     }
 
-    public Room getRoomById(int roomId){
-        for (Room room : rooms) {
-            if (room.getRoomId() == roomId) {
-                return room;
-            }
-        }
-        throw new NullPointerException("There is no room with id: " + roomId);
-    }
-
     public void describe() {
-        System.out.println("\n" + getBuildingName());
+        System.out.println("\n" + getName());
         for (Room room : rooms) {
             room.describe();
         }

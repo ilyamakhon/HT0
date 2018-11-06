@@ -6,35 +6,26 @@ import java.util.Objects;
 
 public class Room {
 
-    private int roomId;
-    private String roomName;
-    private double roomArea;
+    private String name;
+    private double area;
     private int windowsAmount;
     private List<RoomItem> roomItems = new ArrayList<>();
     private List<LightingDevice> lightingDevices = new ArrayList<>();
 
-    public int getRoomId() {
-        return roomId;
+    public String getName() {
+        return name;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public double getArea() {
+        return area;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public double getRoomArea() {
-        return roomArea;
-    }
-
-    public void setRoomArea(double roomArea) {
-        this.roomArea = roomArea;
+    public void setArea(double area) {
+        this.area = area;
     }
 
     public int getWindowsAmount() {
@@ -66,23 +57,22 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return roomId == room.roomId &&
-                Double.compare(room.roomArea, roomArea) == 0 &&
+        return Double.compare(room.area, area) == 0 &&
                 windowsAmount == room.windowsAmount &&
-                Objects.equals(roomName, room.roomName) &&
+                Objects.equals(name, room.name) &&
                 Objects.equals(roomItems, room.roomItems) &&
                 Objects.equals(lightingDevices, room.lightingDevices);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roomId, roomName, roomArea, windowsAmount, roomItems, lightingDevices);
+        return Objects.hash(name, area, windowsAmount, roomItems, lightingDevices);
     }
 
     public double getSummaryItemArea() {
         double summaryItemArea = 0.0;
         for (RoomItem roomItem : roomItems) {
-            summaryItemArea +=  (roomItem.getMaxRoomItemArea() + roomItem.getMinRoomItemArea()) / 2;
+            summaryItemArea +=  (roomItem.getMaxArea() + roomItem.getMinArea()) / 2;
         }
         return summaryItemArea;
     }
@@ -90,16 +80,16 @@ public class Room {
     public double getFreeRoomArea() {
         double freeRoomArea = 0.0;
         for (RoomItem roomItem : roomItems) {
-            freeRoomArea += (roomItem.getMaxRoomItemArea() + roomItem.getMinRoomItemArea()) / 2;
+            freeRoomArea += (roomItem.getMaxArea() + roomItem.getMinArea()) / 2;
         }
-        return roomArea - freeRoomArea;
+        return area - freeRoomArea;
     }
 
     public double getSummaryIlluminance() {
         double summaryIlluminanceOfLightingDevices = 0.0;
         double summaryIlluminanceOfWindows = 0.0;
         for (LightingDevice lightingDevice : lightingDevices) {
-            summaryIlluminanceOfLightingDevices += lightingDevice.getIlluminanceOfLightingDevice();
+            summaryIlluminanceOfLightingDevices += lightingDevice.getIlluminance();
         }
 
         if ( windowsAmount > 0 ) {
@@ -110,11 +100,11 @@ public class Room {
     }
 
     public double getPercentageOfUsingArea() {
-        return Math.round(getSummaryItemArea()*100/roomArea);
+        return Math.round(getSummaryItemArea()*100/ area);
     }
 
     public double getPercentageOfFreeArea() {
-        return Math.round(getFreeRoomArea()*100/roomArea);
+        return Math.round(getFreeRoomArea()*100/ area);
     }
 
     public void addRoomItem(RoomItem roomItem) {
@@ -126,7 +116,7 @@ public class Room {
     }
 
     public void describe() {
-        System.out.println("\n\t" + getRoomName() + "\n" + "\n\t\tRoom area = " + getRoomArea() + " m2");
+        System.out.println("\n\t" + getName() + "\n" + "\n\t\tRoom area = " + getArea() + " m2");
         System.out.println("\t\tFree room area = " + getFreeRoomArea() + " m2. Or " + getPercentageOfFreeArea() + "% of free space");
 
         if (roomItems.isEmpty()) {
@@ -134,16 +124,27 @@ public class Room {
         } else {
             System.out.println("\t\tFurniture: ");
             for (RoomItem roomItem : roomItems) {
-                if (roomItem.getMinRoomItemArea() == 0.0 || roomItem.getMinRoomItemArea() < 0.0){
-                    System.out.println("\t\t\t" + roomItem.getRoomItemName() + " (area = " +
-                            roomItem.getMaxRoomItemArea() + " m2)");
+                if (roomItem.getMinArea() < 0.0) {
+                    throw new IllegalArgumentException("\nRoom " + name +
+                            "\nIncorrect minimum room item area " + roomItem.getMinArea() +
+                            "\nRoom item: " + roomItem.getName());
                 }
-                if (roomItem.getMaxRoomItemArea() == 0.0 || roomItem.getMaxRoomItemArea() < 0.0) {
-                    System.out.println("\t\t\t" + roomItem.getRoomItemName() + " (area = " +
-                            roomItem.getMinRoomItemArea() + " m2)");
+                if (roomItem.getMaxArea() < 0.0) {
+                    throw new IllegalArgumentException("\nRoom " + name +
+                            "\nIncorrect maximum room item area " + roomItem.getMaxArea()+
+                            "\nRoom item: " + roomItem.getName());
+                }
+                if (roomItem.getMaxArea() < roomItem.getMinArea()) {
+                    throw new IllegalArgumentException("\nRoom: " + name +
+                            "\nRoom item: " + roomItem.getName() + " minimum area = " + roomItem.getMinArea() +
+                            " it is greater than maximum area = " + roomItem.getMaxArea());
+                }
+                if (roomItem.getMinArea() == 0.0){
+                    System.out.println("\t\t\t" + roomItem.getName() + " (area = " +
+                            roomItem.getMaxArea() + " m2)");
                 } else {
-                    System.out.println("\t\t\t" + roomItem.getRoomItemName() + " (area = " + "from " +
-                            roomItem.getMinRoomItemArea() + " to " + roomItem.getMaxRoomItemArea() + " m2)");
+                    System.out.println("\t\t\t" + roomItem.getName() + " (area = " + "from " +
+                            roomItem.getMinArea() + " to " + roomItem.getMaxArea() + " m2)");
                 }
             }
         }
@@ -161,8 +162,8 @@ public class Room {
             System.out.println("\t\t\tIn this room no lighting devices.");
         } else {
             for (LightingDevice lightingDevice : lightingDevices) {
-                System.out.println("\t\t\t" + lightingDevice.getLightingDeviceName() + " with illuminance of " +
-                        lightingDevice.getIlluminanceOfLightingDevice() + " lux");
+                System.out.println("\t\t\t" + lightingDevice.getName() + " with illuminance of " +
+                        lightingDevice.getIlluminance() + " lux");
             }
         }
     }
@@ -174,18 +175,13 @@ public class Room {
             return new RoomBuilder();
         }
 
-        public RoomBuilder withRoomId(int roomId) {
-            room.roomId = roomId;
-            return this;
-        }
-
         public RoomBuilder withRoomName(String roomName) {
-            room.roomName = roomName;
+            room.name = roomName;
             return this;
         }
 
         public RoomBuilder withRoomArea(double roomArea) {
-            room.roomArea = roomArea;
+            room.area = roomArea;
             return this;
         }
 

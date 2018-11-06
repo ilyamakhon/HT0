@@ -4,42 +4,32 @@ import java.util.Objects;
 
 public class RoomItem {
 
-    private int roomItemId;
-    private String roomItemName;
-    private double minRoomItemArea;
-    private double maxRoomItemArea;
+    private String name;
+    private double minArea;
+    private double maxArea;
 
-
-    public int getRoomItemId() {
-        return roomItemId;
+    public String getName() {
+        return name;
     }
 
-    public void setRoomItemId(int roomItemId) {
-        this.roomItemId = roomItemId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getRoomItemName() {
-        return roomItemName;
+    public double getMinArea() {
+        return minArea;
     }
 
-    public void setRoomItemName(String roomItemName) {
-        this.roomItemName = roomItemName;
+    public void setMinArea(double minArea) {
+        this.minArea = minArea;
     }
 
-    public double getMinRoomItemArea() {
-        return minRoomItemArea;
+    public double getMaxArea() {
+        return maxArea;
     }
 
-    public void setMinRoomItemArea(double minRoomItemArea) {
-        this.minRoomItemArea = minRoomItemArea;
-    }
-
-    public double getMaxRoomItemArea() {
-        return maxRoomItemArea;
-    }
-
-    public void setMaxRoomItemArea(double maxRoomItemArea) {
-        this.maxRoomItemArea = maxRoomItemArea;
+    public void setMaxArea(double maxArea) {
+        this.maxArea = maxArea;
     }
 
     @Override
@@ -47,15 +37,14 @@ public class RoomItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoomItem roomItem = (RoomItem) o;
-        return roomItemId == roomItem.roomItemId &&
-                Double.compare(roomItem.minRoomItemArea, minRoomItemArea) == 0 &&
-                Double.compare(roomItem.maxRoomItemArea, maxRoomItemArea) == 0 &&
-                Objects.equals(roomItemName, roomItem.roomItemName);
+        return Double.compare(roomItem.minArea, minArea) == 0 &&
+                Double.compare(roomItem.maxArea, maxArea) == 0 &&
+                Objects.equals(name, roomItem.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roomItemId, roomItemName, minRoomItemArea, maxRoomItemArea);
+        return Objects.hash(name, minArea, maxArea);
     }
 
     public static class RoomItemBuilder {
@@ -66,17 +55,17 @@ public class RoomItem {
         }
 
         public RoomItemBuilder withRoomItemName(String roomItemName) {
-            roomItem.roomItemName = roomItemName;
+            roomItem.name = roomItemName;
             return this;
         }
 
         public RoomItemBuilder withMinRoomItemArea(double minRoomItemArea) {
-            roomItem.minRoomItemArea = minRoomItemArea;
+            roomItem.minArea = minRoomItemArea;
             return this;
         }
 
         public RoomItemBuilder withMaxRoomItemArea(double maxRoomItemArea) {
-            roomItem.maxRoomItemArea = maxRoomItemArea;
+            roomItem.maxArea = maxRoomItemArea;
             return this;
         }
 

@@ -35,33 +35,37 @@ public class BuildingStorageImpl implements BuildingStorage {
         room411.addLightingDevice(buildLightingDevice("Lamp", 150));
         room411.addLightingDevice(buildLightingDevice("Chandelier", 450));
         room411.addLightingDevice(buildLightingDevice("Light bulb", 150));
-        room411.addRoomItem(buildRoomItem("Chair", 3, 5));
-        room411.addRoomItem(buildRoomItem("Table", 4, 4));
+        room411.addRoomItem(buildRoomItem("Chair", 0, 5));
+        room411.addRoomItem(buildRoomItem("Table", 0, 100));
         building1.addRoom(room411);
 
-
-        building1.addRoom(buildRoom("Room 109", 2, 215));
-        building1.getRoomByName("Room 109").addLightingDevice(buildLightingDevice("Lamp", 250));
-        building1.getRoomByName("Room 109").addLightingDevice(buildLightingDevice("Chandelier", 395));
-        building1.getRoomByName("Room 109").addLightingDevice(buildLightingDevice("Light bulb", 100));
-        building1.getRoomByName("Room 109").addRoomItem(buildRoomItem("Sofa", 6, 9));
-        building1.getRoomByName("Room 109").addRoomItem(buildRoomItem("Chair", 2, 4));
+        Room room109 = buildRoom("Room 109", 2, 215);
+        room109.addLightingDevice(buildLightingDevice("Lamp", 250));
+        room109.addLightingDevice(buildLightingDevice("Chandelier", 395));
+        room109.addLightingDevice(buildLightingDevice("Light bulb", 100));
+        room109.addRoomItem(buildRoomItem("Sofa", 6, 9));
+        room109.addRoomItem(buildRoomItem("Chair", 2, 4));
+        building1.addRoom(room109);
 
         //-------------------------BUILDING 2-------------------------//
-        building2.addRoom(buildRoom("Room 314", 2, 74));
-        building2.getRoomByName("Room 314").addLightingDevice(buildLightingDevice("Light bulb", 150));
-        building2.getRoomByName("Room 314").addLightingDevice(buildLightingDevice("Light bulb", 250));
-        building2.getRoomByName("Room 314").addLightingDevice(buildLightingDevice("Chandelier", 550));
-        building2.getRoomByName("Room 314").addRoomItem(buildRoomItem("Shelf", 4, 7));
-        building2.getRoomByName("Room 314").addRoomItem(buildRoomItem("Cabinet", 7, 10));
+        Room room314 = buildRoom("Room 314", 2, 74);
+        room314.addLightingDevice(buildLightingDevice("Light bulb", 150));
+        room314.addLightingDevice(buildLightingDevice("Light bulb", 250));
+        room314.addLightingDevice(buildLightingDevice("Chandelier", 550));
+        room314.addRoomItem(buildRoomItem("Shelf", 4, 7));
+        room314.addRoomItem(buildRoomItem("Cabinet", 7, 10));
+        building2.addRoom(room314);
 
-        building2.addRoom(buildRoom("Room 212", 1, 30));
-        building2.getRoomByName("Room 212").addLightingDevice(buildLightingDevice("Chandelier", 350));
-        building2.getRoomByName("Room 212").addLightingDevice(buildLightingDevice("Light bulb", 250));
-        building2.getRoomByName("Room 212").addRoomItem(buildRoomItem("Sofa", 4, 6));
-        building2.getRoomByName("Room 212").addRoomItem(buildRoomItem("Chair", 2, 2));
+        Room room212 = buildRoom("Room 314", 1, 30);
+        room212.addLightingDevice(buildLightingDevice("Chandelier", 350));
+        room212.addLightingDevice(buildLightingDevice("Light bulb", 250));
+        room212.addRoomItem(buildRoomItem("Sofa", 4, 6));
+        room212.addRoomItem(buildRoomItem("Chair", 2, 2));
+        building2.addRoom(room212);
 
         //-------------------------BUILDING 3-------------------------//
+
+        //ANOTHER VARIANCE TO WORK WITH ROOMS
 
         building3.addRoom(buildRoom("Room 309", 4, 150));
         building3.getRoomByName("Room 309").addRoomItem(buildRoomItem("Chair", 4, 6));

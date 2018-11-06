@@ -4,32 +4,23 @@ import java.util.Objects;
 
 public class LightingDevice {
 
-    private int lightingDeviceId;
-    private String lightingDeviceName;
-    private double illuminanceOfLightingDevice;
+    private String name;
+    private double illuminance;
 
-    public int getLightingDeviceId() {
-        return lightingDeviceId;
+    public String getName() {
+        return name;
     }
 
-    public void setLightingDeviceId(int lightingDeviceId) {
-        this.lightingDeviceId = lightingDeviceId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLightingDeviceName() {
-        return lightingDeviceName;
+    public double getIlluminance() {
+        return illuminance;
     }
 
-    public void setLightingDeviceName(String lightingDeviceName) {
-        this.lightingDeviceName = lightingDeviceName;
-    }
-
-    public double getIlluminanceOfLightingDevice() {
-        return illuminanceOfLightingDevice;
-    }
-
-    public void setIlluminanceOfLightingDevice(double illuminanceOfLightingDevice) {
-        this.illuminanceOfLightingDevice = illuminanceOfLightingDevice;
+    public void setIlluminance(double illuminance) {
+        this.illuminance = illuminance;
     }
 
     @Override
@@ -37,14 +28,13 @@ public class LightingDevice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LightingDevice that = (LightingDevice) o;
-        return lightingDeviceId == that.lightingDeviceId &&
-                Double.compare(that.illuminanceOfLightingDevice, illuminanceOfLightingDevice) == 0 &&
-                Objects.equals(lightingDeviceName, that.lightingDeviceName);
+        return Double.compare(that.illuminance, illuminance) == 0 &&
+                Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lightingDeviceId, lightingDeviceName, illuminanceOfLightingDevice);
+        return Objects.hash(name, illuminance);
     }
 
     public static class LightingDeviceBuilder {
@@ -55,12 +45,12 @@ public class LightingDevice {
         }
 
         public LightingDeviceBuilder withLightingDeviceName(String lightingDeviceName) {
-            lightingDevice.lightingDeviceName = lightingDeviceName;
+            lightingDevice.name = lightingDeviceName;
             return this;
         }
 
         public LightingDeviceBuilder withIlluminanceOfLightingDevice(double illuminanceOfLightingDevice) {
-            lightingDevice.illuminanceOfLightingDevice = illuminanceOfLightingDevice;
+            lightingDevice.illuminance = illuminanceOfLightingDevice;
             return this;
         }
 

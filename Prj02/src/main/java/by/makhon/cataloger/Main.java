@@ -18,9 +18,8 @@ public class Main {
         ModelBuilder modelBuilder = new ModelBuilder();
         HTMLView htmlView = new HTMLView();
         LogFileAppender logFileAppender = new LogFileAppender();
-        String[] paths = {"C:\\Users\\reven\\Downloads"};
         //Scan all directories and get all files from it
-        directoryScanner.scanDirectories(paths);
+        directoryScanner.scanDirectories(args);
         List<File> filesToConvert = directoryScanner.getFilesList();
         //Converting files from all directories to Mp3Bean format
         List<Mp3Bean> mp3Files = converter.convertFilesToMp3Beans(filesToConvert);

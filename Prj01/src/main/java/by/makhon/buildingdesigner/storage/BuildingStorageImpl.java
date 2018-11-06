@@ -8,7 +8,6 @@ import by.makhon.buildingdesigner.bean.RoomItem;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class BuildingStorageImpl implements BuildingStorage {
 
     private static BuildingStorageImpl ourInstance = new BuildingStorageImpl();

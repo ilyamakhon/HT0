@@ -2,6 +2,9 @@ package by.makhon.buildingdesigner.bean;
 
 import java.util.Objects;
 
+/**
+ * Class LightingDevice, bean which contains whole information about room lighting device
+ */
 public class LightingDevice {
 
     private String name;
@@ -37,6 +40,10 @@ public class LightingDevice {
         return Objects.hash(name, illuminance);
     }
 
+    /**
+     * Class LightingDeviceBuilder needed for convenient creating lighting devices inside room
+     * based on Builder Pattern
+     */
     public static class LightingDeviceBuilder {
         private LightingDevice lightingDevice = new LightingDevice();
 

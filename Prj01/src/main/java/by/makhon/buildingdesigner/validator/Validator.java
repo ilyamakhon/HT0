@@ -8,6 +8,10 @@ import by.makhon.buildingdesigner.exception.SpaceUsageToMuchException;
 
 import java.util.List;
 
+/**
+ * Validator provides quality of creating items according to agreed parameters
+ * Based on Singleton Pattern
+ */
 public interface Validator {
     static Validator getInstance() {
         return ValidatorImpl.getInstance();

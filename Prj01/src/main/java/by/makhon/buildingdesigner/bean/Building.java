@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class Building, main bean which contains building name and rooms
+ */
 public class Building {
 
     private String name;

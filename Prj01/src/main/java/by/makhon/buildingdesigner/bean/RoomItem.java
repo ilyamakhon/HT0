@@ -2,10 +2,17 @@ package by.makhon.buildingdesigner.bean;
 
 import java.util.Objects;
 
+/**
+ * Class RoomItem, bean which contains information about room items
+ */
 public class RoomItem {
 
     private String name;
+    /**Min item area needed for planning ranges of item taken area
+     * if user don't know how much area room item or furniture will take*/
     private double minArea;
+    /**Max item area needed for planning ranges of item taken area
+     * if user don't know how much area room item or furniture will take*/
     private double maxArea;
 
     public String getName() {
@@ -47,6 +54,10 @@ public class RoomItem {
         return Objects.hash(name, minArea, maxArea);
     }
 
+    /**
+     * Class RoomItemBuilder needed for convenient creating items inside room
+     * based on Builder Pattern
+     */
     public static class RoomItemBuilder {
         private RoomItem roomItem = new RoomItem();
 

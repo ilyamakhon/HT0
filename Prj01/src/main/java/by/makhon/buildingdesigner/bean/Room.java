@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class Room, bean which contains information about room and also contains lighting devices and some room items
+ * like furniture or other room items
+ */
 public class Room {
 
     private String name;
@@ -168,6 +172,10 @@ public class Room {
         }
     }
 
+    /**
+     * Class RoomBuilder needed for convenient creating rooms inside building
+     * based on Builder Pattern
+     */
     public static class RoomBuilder {
         private Room room = new Room();
 

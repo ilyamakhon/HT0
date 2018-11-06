@@ -1,11 +1,11 @@
 package by.makhon.cataloger.bean;
 
-import java.util.Objects;
-
+/**
+ * Song bean for creating view model
+ * Contains song characteristics
+ */
 public class Song {
 
-    private String artist;
-    private String album;
     private String name;
     private String duration;
     private String localLink;
@@ -41,21 +41,5 @@ public class Song {
 
     public void setLocalLink(String localLink) {
         this.localLink = localLink;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
     }
 }

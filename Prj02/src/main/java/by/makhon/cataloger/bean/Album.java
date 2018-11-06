@@ -3,8 +3,11 @@ package by.makhon.cataloger.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class Album, bean for creating view model
+ * Contains album characteristics
+ */
 public class Album {
-    private String artistName;
     private String name;
     private List<Song> songs = new ArrayList<>();
 
@@ -13,19 +16,6 @@ public class Album {
 
     public Album(String name) {
         this.name = name;
-    }
-
-    public Album(String name, String artistName) {
-        this.name = name;
-        this.artistName = artistName;
-    }
-
-    public String getArtistName() {
-        return artistName;
-    }
-
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
     }
 
     public String getName() {

@@ -1,5 +1,9 @@
 package by.makhon.cataloger.bean;
 
+/**
+ * Class Mp3Bean, bean for sorting mp3 files from all files
+ *
+ */
 public class Mp3Bean {
 
     private String artist;

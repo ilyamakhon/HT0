@@ -5,7 +5,7 @@ import by.makhon.cataloger.converter.FileConverter;
 import by.makhon.cataloger.logger.LogFileAppender;
 import by.makhon.cataloger.modelbuilder.ModelBuilder;
 import by.makhon.cataloger.scanner.DirectoryScanner;
-import by.makhon.cataloger.view.HTMLBuilder;
+import by.makhon.cataloger.view.HTMLView;
 
 import java.io.File;
 import java.util.List;
@@ -14,17 +14,22 @@ public class Main {
 
     public static void main(String[] args) {
         DirectoryScanner directoryScanner = new DirectoryScanner();
-        FileConverter fileConverter = new FileConverter();
+        FileConverter converter = new FileConverter();
         ModelBuilder modelBuilder = new ModelBuilder();
-        HTMLBuilder htmlBuilder = new HTMLBuilder();
+        HTMLView htmlView = new HTMLView();
         LogFileAppender logFileAppender = new LogFileAppender();
-
-        directoryScanner.scanDirectories(args);
+        String[] paths = {"C:\\Users\\reven\\Downloads"};
+        //Scan all directories and get all files from it
+        directoryScanner.scanDirectories(paths);
         List<File> filesToConvert = directoryScanner.getFilesList();
-        List<Mp3Bean> mp3Files = fileConverter.fileToMP3(filesToConvert);
+        //Converting files from all directories to Mp3Bean format
+        List<Mp3Bean> mp3Files = converter.convertFilesToMp3Beans(filesToConvert);
+        //Build model for making view
         modelBuilder.buildModel(mp3Files);
         Model model = modelBuilder.getModel();
-        htmlBuilder.buildHTML(model);
+        //Building HTML view
+        htmlView.buildHTML(model);
+        //Logging Mp3 duplicates
         logFileAppender.log(mp3Files);
     }
 }

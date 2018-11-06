@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class Mp3Duplicate, bean for finding duplicates among mp3 files
+ */
 public class Mp3Duplicate {
     private String artist;
     private String album;

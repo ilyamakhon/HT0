@@ -10,9 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class FileConverter converts list of all files from all
+ * directories to Mp3Bean format
+ */
 public class FileConverter {
 
-    public List<Mp3Bean> fileToMP3(List<File> files) {
+    public List<Mp3Bean> convertFilesToMp3Beans(List<File> files) {
         List<Mp3Bean> mp3Beans = new ArrayList<>();
         try {
             for (File file : files) {

@@ -5,7 +5,7 @@ import by.makhon.cataloger.bean.*;
 import java.util.List;
 
 /**
- * Modelbuilder
+ * Class ModelBuilder creates model for correct building HTML view
  */
 public class ModelBuilder {
     private Model model = new Model();

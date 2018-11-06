@@ -7,6 +7,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * Class LogFileAppender creates logs for Mp3 files duplicates
+ */
 public class LogFileAppender {
     private static final Logger CHECKSUM_LOGGER = LogManager.getLogger("duplicates-checksum-log");
     private static final Logger DUPLICATES_LOGGER = LogManager.getLogger("duplicates-log");

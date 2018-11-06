@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Class DuplicatesFinder find all duplicates among Mp3Beans
+ */
 class DuplicatesFinder {
 
     private List<Mp3Duplicate> removeDuplicates(List<Mp3Duplicate> mp3DuplicateList) {

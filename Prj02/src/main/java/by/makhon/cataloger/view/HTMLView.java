@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HTMLBuilder {
+/**
+ * Class HTMLView builds mp3 catalogue view in HTML format
+ */
+public class HTMLView {
     private final String HTML_FILE_PATH = "./src/"+ this.getClass().getPackage().getName().replaceAll(".","/") + "/music_catalogue.html";
 
     public void buildHTML(Model model) {

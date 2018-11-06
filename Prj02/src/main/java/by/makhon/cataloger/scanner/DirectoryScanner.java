@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class DirectoryScanner scans all directories and than creates list of files
+ */
 public class DirectoryScanner {
 
     private List<File> filesList = new ArrayList<>();

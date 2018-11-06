@@ -19,9 +19,7 @@ public class Main {
         HTMLBuilder htmlBuilder = new HTMLBuilder();
         LogFileAppender logFileAppender = new LogFileAppender();
 
-        String[] paths = {"C:\\Users\\reven\\Desktop\\testlog","C:\\Users\\reven\\Downloads"};
-
-        directoryScanner.scanDirectories(paths);
+        directoryScanner.scanDirectories(args);
         List<File> filesToConvert = directoryScanner.getFilesList();
         List<Mp3Bean> mp3Files = fileConverter.fileToMP3(filesToConvert);
         modelBuilder.buildModel(mp3Files);

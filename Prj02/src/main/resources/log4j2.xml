@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <Configuration>   
     <Appenders>
-        <File name="duplicates-log" fileName="target/logs/duplicates.log">
+        <RollingFile name="duplicates-log" fileName="target/logs/duplicates.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
-                <Pattern>%d %p %c{2} [%t] %l %m%n</Pattern>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
-        </File>
-        <File name="duplicates-checksum-log" fileName="target/logs/duplicates_checksum.log">
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="duplicates-checksum-log" fileName="target/logs/duplicates_checksum.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
-                <Pattern>%d %p %c{2} [%t] %l %m%n</Pattern>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>
-        </File>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Logger name="duplicates-log" level="info" additivity="false">

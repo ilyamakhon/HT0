@@ -12,7 +12,7 @@ public class LogFileAppender {
     private static final Logger DUPLICATES_LOGGER = LogManager.getLogger("duplicates-log");
 
     public void log(List<Mp3Bean> mp3Files) {
-        System.setProperty("log4j2.configurationFile", "C:\\Users\\reven\\Desktop\\HT0\\Prj02\\src\\main\\resources\\log4j2.xml");
+        System.setProperty("log4j2.configurationFile", ".src\\main\\resources\\log4j2.xml");
         DuplicatesFinder duplicatesFinder = new DuplicatesFinder();
 
         List<Mp3Duplicate> mp3ChecksumDuplicates = duplicatesFinder.getChecksumDuplicates(mp3Files);

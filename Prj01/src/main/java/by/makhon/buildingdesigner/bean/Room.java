@@ -174,7 +174,7 @@ public class Room {
 
     /**
      * Class RoomBuilder needed for convenient creating rooms inside building
-     * based on Builder Pattern
+     * Based on Builder Pattern
      */
     public static class RoomBuilder {
         private Room room = new Room();

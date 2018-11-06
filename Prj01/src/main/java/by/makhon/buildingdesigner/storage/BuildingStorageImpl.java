@@ -64,7 +64,7 @@ public class BuildingStorageImpl implements BuildingStorage {
 
         //-------------------------BUILDING 3-------------------------//
 
-        //ANOTHER VARIANCE TO WORK WITH ROOMS
+        //Another variance to work with rooms and items
 
         building3.addRoom(buildRoom("Room 309", 4, 150));
         building3.getRoomByName("Room 309").addRoomItem(buildRoomItem("Chair", 4, 6));

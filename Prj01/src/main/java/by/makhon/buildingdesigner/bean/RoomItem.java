@@ -56,7 +56,7 @@ public class RoomItem {
 
     /**
      * Class RoomItemBuilder needed for convenient creating items inside room
-     * based on Builder Pattern
+     * Based on Builder Pattern
      */
     public static class RoomItemBuilder {
         private RoomItem roomItem = new RoomItem();
